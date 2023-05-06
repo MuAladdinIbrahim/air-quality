@@ -17,7 +17,9 @@ function bootstrap() {
     dotenv.config({path: `.env.stage.${process.env.STAGE}`})
     const app = new App()
     initRoutes(app)
-    app.listen(Number(process.env.PORT) || 3000)
+    if(process.env.NODE_ENV !== 'test') {
+        server.listen(Number(process.env.PORT) || 3000)
+    }
     return app.get()
 }
 

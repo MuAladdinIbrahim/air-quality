@@ -6,7 +6,7 @@ const config: Config.InitialOptions = {
     testEnvironment: 'node',
     collectCoverage: true,
     collectCoverageFrom: ['src/**/**.ts'],
-    testRegex: '(/__tests__/.*(\\.|/)(test|spec))\\.[jt]sx?$',
+    testRegex: '(.*/test/.*(\\.|/)(test|spec))\\.[jt]sx?$',
 
 };
 export default config;
