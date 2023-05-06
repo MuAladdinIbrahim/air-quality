@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  title: Air Quality API
+  description: |
+    REST API responsible for exposing
+    the air information of a nearest 
+    city to GPS coordinates using iqair
+  version: 1.0.0
+paths:
+  /healthy:
+    get:
+      summary: check that app is up and running
+      tags:
+        - health
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Thanks for checking, I'm good and alive"
