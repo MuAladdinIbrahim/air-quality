@@ -1,11 +1,12 @@
-import { Router } from "../../../infra/router";
+import { IRouter } from "../../../infra/router";
+import { INearestCityHandler } from "../Abstract/INearestCityHandler";
 import { NearestCityController } from "../controllers";
 import { NearestCityHandler } from "../handlers";
 
 
 export class NearestCityRoute {
-    private nearestCityHandler: NearestCityHandler
-    constructor(private router: Router) { 
+    private nearestCityHandler: INearestCityHandler
+    constructor(private router: IRouter) { 
         this.nearestCityHandler = new NearestCityHandler(new NearestCityController())
     }
 

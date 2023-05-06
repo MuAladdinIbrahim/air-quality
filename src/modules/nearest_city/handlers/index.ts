@@ -1,10 +1,11 @@
 import { Request, Response } from "express"
 import logger from "../../../infra/logger"
-import { NearestCityController } from "../controllers"
+import { INearestCityController } from "../Abstract/INearestCityController"
+import { INearestCityHandler } from "../Abstract/INearestCityHandler"
 import { nearestCityValidator } from "../validation/air-pollution"
 
-export class NearestCityHandler {
-    constructor(private controller: NearestCityController) { }
+export class NearestCityHandler implements INearestCityHandler {
+    constructor(private controller: INearestCityController) { }
 
     async AirPollution(req: Request, res: Response) {
         try {
