@@ -23,3 +23,74 @@ paths:
                   message:
                     type: string
                     example: "Thanks for checking, I'm good and alive"
+  /nearest_city/air/pollution:
+    get:
+      summary: get Air Pollution data for city by its lat, lon
+      description: Fetch nearest city details from iqair and just return back pollution data
+      tags:
+        - AirPollution
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Result:
+                    type: object
+                    properties:
+                      Pollution:
+                        type: object
+                        properties:
+                          ts:
+                            type: string
+                            example: 2023-05-06T09:00:00.000Z
+                          aquis:
+                            type: number
+                            example: 19
+                          mainus:
+                            type: string
+                            example: p2
+                          aqicn:
+                            type: number
+                            example: 19
+                          maincn:
+                            type: string
+                            example: p2
+        '409':
+          description: Conflict |
+            Maybe while integrating with iqair 
+            or pollution key doesn't returned from iqair
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: error message
+                    example:
+                        "Pollution key doesn't returned from IqAir, nearest city data: {}"
+        '400':
+          description: validation error, lat or lon not provided as URL query params
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: error message
+                    example: Error validating incoming request, \"lat\" is required
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: error message
+                        
