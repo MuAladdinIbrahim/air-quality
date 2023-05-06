@@ -2,25 +2,32 @@ import express from 'express'
 import cors from 'cors'
 import logger from './logger'
 
-export class App {
-    private static app: express.Application
-    constructor() { }
-    static async listen(port: number) {
-        App.app = express()
-        App.app.use(express.urlencoded({ extended: true }))
-        App.app.use(cors())
-        App.app.use(express.json())
-
-        App.app.listen(port, () => {
+export class App implements IApp {
+    expressApp: express.Application
+    constructor() {
+        this.expressApp = express()
+        this.expressApp.use(express.urlencoded({ extended: true }))
+        this.expressApp.use(cors())
+        this.expressApp.use(express.json())
+     }
+    listen(port: number) {
+        this.expressApp.listen(port, () => {
             logger.info(`App is up and running on ${port}`)
         })
     }
 
-    static get() {
-        return App.app;
+    get() {
+        return this.expressApp;
     }
 
-    static useRouter(router: express.Router | express.Router[]) {
-        App.app.use(router)
+    useRouter(router: express.Router | express.Router[]) {
+        this.expressApp.use(router)
     }
+}
+
+export interface IApp {
+    expressApp: express.Application
+    listen: (port: number) => void
+    get: () => express.Application
+    useRouter: (router: express.Router | express.Router[]) => void
 }

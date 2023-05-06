@@ -13,8 +13,8 @@ export class NearestCityController implements INearestCityController {
     async AirPollution(lat: number, lon: number): Promise<AirPollutionResult> {
         try {
             const cityData = await this.iqAirService.nearestCityAirData(lat, lon)
-            if (!cityData.data.current.pollution) {
-                throw new CustomError(`pollution key doesn't returned from IqAir, nearest city data: ${cityData}`, 409)
+            if (!cityData?.data?.current?.pollution) {
+                throw new CustomError(`pollution key doesn't returned from IqAir, nearest city data: ${JSON.stringify(cityData)}`, 409)
             }
             const airPollutionResult: AirPollutionResult = {
                 Result: { Pollution: cityData?.data?.current?.pollution }

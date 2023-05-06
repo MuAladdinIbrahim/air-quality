@@ -14,3 +14,5 @@ export class HttpRequest {
         }
     }
 }
+
+export const httpRequest = new HttpRequest()
