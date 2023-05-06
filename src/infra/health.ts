@@ -5,7 +5,7 @@ export class HealthRoute {
 
     init() {
         this.router.add('get', '/healthy', (req: any, res: any, next: any) => {
-            res.json("Thanks for checking, I'm good and alive")
+            res.json({ message: "Thanks for checking, I'm good and alive" })
         })
         return this.router.get()
     }

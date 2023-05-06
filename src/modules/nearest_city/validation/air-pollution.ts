@@ -10,7 +10,7 @@ class NearestCityValidator {
             lon: Joi.number().min(-180).max(180).required()
         });
         const { error } = schema.validate(input);
-        if( error ) throw new CustomError(`Error validating incoming request, ${JSON.stringify(error.details)}`, 400)
+        if( error ) throw new CustomError(`Error validating incoming request, ${error.details[0]?.message}`, 400)
     }
 }
 

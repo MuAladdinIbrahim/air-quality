@@ -18,7 +18,7 @@ function bootstrap() {
     const app = new App()
     initRoutes(app)
     if(process.env.NODE_ENV !== 'test') {
-        server.listen(Number(process.env.PORT) || 3000)
+        app.listen(Number(process.env.PORT) || 3000)
     }
     return app.get()
 }
