@@ -76,7 +76,7 @@ Also, you'll need to install npm or yarn to run the project
 ## Usage
 
 The application contains endpoints and a cron job, <br/>
-_To check all available endpoints, please refer to the [OpenApi Documentation](./openapi.yaml)_ <br/> <br/>
+_To check all available endpoints, please refer to the [OpenApi Documentation](./openapi.yaml). You may use [Swagger Editor](https://editor.swagger.io/) to render the file._ <br/> 
 The cron job is respoinsible for getting air quality data for Paris city every minute and store it into database. This data is used later to get most polluted data and time for Paris.
 
 1. Run tests to make sure all is good
