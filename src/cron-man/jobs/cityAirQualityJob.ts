@@ -3,19 +3,15 @@ import logger from "../../infra/logger"
 import { AirPollutionResult } from "../../modules/nearest-city/Abstract/types/AirPollutionResult"
 import { NearestCityController } from "../../modules/nearest-city/controllers"
 
-export const parisAirQuality = async () => {
-    const parisCordinates = {
-        lat: Number(process.env.PARIS_LAT) || 48.856613,
-        lon: Number(process.env.PARIS_LON) || 2.352222
-    }
+export const cityAirQuality = async (city: string, cityCordinates: {lat: number, lon: number}) => {
     try {
-        const data: AirPollutionResult = await (new NearestCityController()).airPollution(parisCordinates.lat, parisCordinates.lon)
+        const data: AirPollutionResult = await (new NearestCityController()).airPollution(cityCordinates.lat, cityCordinates.lon)
         const pollution = data?.Result?.Pollution
         await dbClient.connect()
         const database = dbClient.db(process.env.MONGODB_NAME || 'airQuality')
         const citiesCollection = database.collection('cities')
         const document: CityModel = {
-            city: 'Paris',
+            city,
             datetime: new Date().toISOString(),
             ...pollution
         }
