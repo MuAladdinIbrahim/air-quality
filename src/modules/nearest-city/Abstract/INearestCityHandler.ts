@@ -1,3 +1,4 @@
 export interface INearestCityHandler {
-    AirPollution: (req: any, res: any) => Promise<any>
+    airPollution: (req: any, res: any) => Promise<any>
+    mostPollutedDate: (req: any, res: any) => Promise<any>
 }

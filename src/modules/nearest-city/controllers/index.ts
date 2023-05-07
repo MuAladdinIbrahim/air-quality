@@ -3,6 +3,7 @@ import { IqAir } from "../../../services/iqair/iqair";
 import { CustomError } from "../../../utils/CustomError";
 import { INearestCityController } from "../Abstract/INearestCityController";
 import { AirPollutionResult } from "../Abstract/types/AirPollutionResult";
+import { getPollutedDate } from "../dal/get";
 
 export class NearestCityController implements INearestCityController {
     iqAirService: IqAir
@@ -24,6 +25,19 @@ export class NearestCityController implements INearestCityController {
             logger.error(`[NearestCityController][AirPollution] error: ${error}`)
             throw error
         }
+    }
 
+    async mostPollutedDate(city: string): Promise<{date: string, time: string}> {
+        try {
+            const datetimeISO: string = await getPollutedDate(city)
+            const datetime = new Date(datetimeISO)
+            return {
+                date: datetime.toDateString(),
+                time: datetime.toTimeString()
+            }
+        } catch (error: any) {
+            logger.error(`[NearestCityController][mostPollutedDate] error: ${error}`)
+            throw error
+        }
     }
 }

@@ -10,7 +10,7 @@ describe('/nearest_city/air/pollution', () => {
         jest.restoreAllMocks()
     })
     it('Should return validation error as lat, lon are not provided', async () => {
-        const res = await request.get('/nearest_city/air/pollution')
+        const res = await request.get('/nearest-city/air/pollution')
         expect(res.statusCode).toBe(400)
         expect(res.body.message.includes('Error validating incoming request')).toBeTruthy()
     })
@@ -29,7 +29,7 @@ describe('/nearest_city/air/pollution', () => {
             }
         })
         const [lat, lon] = [31.21564, 29.95527]
-        const res = await request.get(`/nearest_city/air/pollution?lat=${lat}&lon=${lon}`)
+        const res = await request.get(`/nearest-city/air/pollution?lat=${lat}&lon=${lon}`)
         expect(res.statusCode).toBe(200)
         expect(res.body).toMatchObject({
             Result: {
@@ -47,7 +47,7 @@ describe('/nearest_city/air/pollution', () => {
     it('Should return 409 as iqAir is not available for any reason', async () => {
         jest.spyOn(HttpRequest.prototype, 'get').mockRejectedValue(new CustomError('error', 409))
         const [lat, lon] = [31.21564, 29.95527]
-        const res = await request.get(`/nearest_city/air/pollution?lat=${lat}&lon=${lon}`)
+        const res = await request.get(`/nearest-city/air/pollution?lat=${lat}&lon=${lon}`)
         console.log(res)
         expect(res.statusCode).toBe(409)
         expect(res.body.message.includes('Error while integrating with IqAir')).toBeTruthy()
