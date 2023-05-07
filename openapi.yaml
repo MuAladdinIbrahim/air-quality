@@ -23,7 +23,7 @@ paths:
                   message:
                     type: string
                     example: "Thanks for checking, I'm good and alive"
-  /nearest_city/air/pollution:
+  /nearest-city/air/pollution:
     get:
       summary: get Air Pollution data for city by its lat, lon
       description: Fetch nearest city details from iqair and just return back pollution data
@@ -83,6 +83,52 @@ paths:
                     type: string
                     description: error message
                     example: Error validating incoming request, \"lat\" is required
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: error message
+  /nearest-city/most-polluted-date:
+    get:
+      summary: get the time and date where the city is most polluted, default city is Paris
+      tags:
+        - AirPollution
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Result:
+                    type: object
+                    properties:
+                      Pollution:
+                        type: object
+                        properties:
+                          date:
+                            type: string
+                            example: Sun May 07 2023
+                          time:
+                            type: string
+                            example: 06:21:00 GMT+0200 (Eastern European Standard Time)
+        '404':
+          description: if there's no citites recorded in db
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: error message
+                    example: "No cities recorded in db for city: Cairo"
         '500':
           description: server error
           content:
