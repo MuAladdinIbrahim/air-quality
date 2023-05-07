@@ -11,7 +11,7 @@ export class NearestCityHandler implements INearestCityHandler {
         try {
             nearestCityValidator.AirPollution(req.query)
             const { lat, lon }: any = req.query
-            const result = await this.controller.AirPollution(lat, lon)
+            const result = await this.controller.airPollution(lat, lon)
             res.status(200).send(result)
         } catch (error: any) {
             logger.error({error: error.stack})

@@ -10,7 +10,7 @@ export class NearestCityController implements INearestCityController {
         this.iqAirService = new IqAir(process.env.IQAIR_URL || "", process.env.IQAIR_KEY || "")
     }
 
-    async AirPollution(lat: number, lon: number): Promise<AirPollutionResult> {
+    async airPollution(lat: number, lon: number): Promise<AirPollutionResult> {
         try {
             const cityData = await this.iqAirService.nearestCityAirData(lat, lon)
             if (!cityData?.data?.current?.pollution) {

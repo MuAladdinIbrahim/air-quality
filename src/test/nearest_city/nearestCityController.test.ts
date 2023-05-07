@@ -1,8 +1,8 @@
-import { NearestCityController } from "../../modules/nearest_city/controllers"
+import { NearestCityController } from "../../modules/nearest-city/controllers"
 import { IqAir } from "../../services/iqair/iqair"
 import { CustomError } from "../../utils/CustomError"
 import { HttpRequest, httpRequest } from "../../utils/HttpRequest"
-import { AirPollutionResult } from "..//../modules/nearest_city/Abstract/types/AirPollutionResult"
+import { AirPollutionResult } from "../../modules/nearest-city/Abstract/types/AirPollutionResult"
 
 describe('Nearest City Controller', () => {
     const nearestCityController = new NearestCityController()
@@ -26,7 +26,7 @@ describe('Nearest City Controller', () => {
                     }
                 }
             })
-            const result = await nearestCityController.AirPollution(lat, lon)
+            const result = await nearestCityController.airPollution(lat, lon)
             expect(result).toHaveProperty('Result')
             expect(result).toMatchObject({
                 Result: {
@@ -44,7 +44,7 @@ describe('Nearest City Controller', () => {
         it('Should throw error [integrating with iqair]', async () => {
             try {
                 jest.spyOn(HttpRequest.prototype, 'get').mockRejectedValue(new CustomError('http call error', 409))
-                await nearestCityController.AirPollution(lat, lon)
+                await nearestCityController.airPollution(lat, lon)
             } catch (error: any) {
                 expect(error.message).toBe(`Error while integrating with IqAir: http call error`)
                 expect(error.code).toBe(409)
@@ -54,7 +54,7 @@ describe('Nearest City Controller', () => {
         it('Should throw error [pollution key not found] if data returned from iqair is not formatted right', async () => {
             try {
                 jest.spyOn(IqAir.prototype,'nearestCityAirData').mockResolvedValue({ data: {} })
-                await nearestCityController.AirPollution(lat, lon)
+                await nearestCityController.airPollution(lat, lon)
             } catch (error: any) {
                 expect(error.message).toBe(`pollution key doesn't returned from IqAir, nearest city data: ${JSON.stringify({ data: {} })}`)
             }

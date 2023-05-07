@@ -1,7 +1,7 @@
 import { HealthRoute } from "./infra/health";
 import { App, IApp } from "./infra/app";
 import { Router } from "./infra/router";
-import { NearestCityRoute } from "./modules/nearest_city/routes";
+import { NearestCityRoute } from "./modules/nearest-city/routes";
 import dotenv from "dotenv"
 
 function initRoutes(app: IApp) {
