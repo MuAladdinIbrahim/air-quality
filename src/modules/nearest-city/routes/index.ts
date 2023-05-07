@@ -13,7 +13,7 @@ export class NearestCityRoute implements IRoute {
 
     init() {
         this.router.add('get', '/nearest-city/air/pollution', this.nearestCityHandler.airPollution.bind(this.nearestCityHandler))
-        this.router.add('get', '/nearest-city/most-polluted-time', this.nearestCityHandler.mostPollutedDate.bind(this.nearestCityHandler))
+        this.router.add('get', '/nearest-city/most-polluted-date', this.nearestCityHandler.mostPollutedDate.bind(this.nearestCityHandler))
         return this.router.get()
     }
 }

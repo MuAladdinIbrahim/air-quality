@@ -3,7 +3,7 @@ import { IqAir } from '../../services/iqair/iqair'
 import { CustomError } from '../../utils/CustomError'
 import { HttpRequest } from '../../utils/HttpRequest'
 
-describe('/nearest_city/air/pollution', () => {
+describe('/nearest-city/air/pollution', () => {
     beforeEach(() => {
     })
     afterEach(() => {
@@ -48,7 +48,6 @@ describe('/nearest_city/air/pollution', () => {
         jest.spyOn(HttpRequest.prototype, 'get').mockRejectedValue(new CustomError('error', 409))
         const [lat, lon] = [31.21564, 29.95527]
         const res = await request.get(`/nearest-city/air/pollution?lat=${lat}&lon=${lon}`)
-        console.log(res)
         expect(res.statusCode).toBe(409)
         expect(res.body.message.includes('Error while integrating with IqAir')).toBeTruthy()
     })

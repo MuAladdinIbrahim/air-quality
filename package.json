@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "tsc && STAGE=dev node dist/index.js",
     "dev": "STAGE=dev nodemon src/index.ts",
-    "test": "STAGE=test jest --passWithNoTests",
+    "test": "tsc && STAGE=test jest --passWithNoTests",
     "cron:paris": "tsc && node dist/src/cron-man/scheduler/parisAirQualityScheduler.js"
   },
   "devDependencies": {
