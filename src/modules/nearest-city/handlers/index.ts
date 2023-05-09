@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import logger from "../../../infra/logger"
 import { INearestCityController } from "../Abstract/INearestCityController"
 import { INearestCityHandler } from "../Abstract/INearestCityHandler"
-import { nearestCityValidator } from "../validation/air-pollution"
+import { nearestCityValidator } from "../validation/airPollution"
 
 export class NearestCityHandler implements INearestCityHandler {
     constructor(private controller: INearestCityController) { }
