@@ -10,7 +10,6 @@ class EnvVarValidator {
             IQAIR_URL: Joi.string().required(),
             MONGODB_URL: Joi.string().required(),
             MONGODB_NAME: Joi.string().required(),
-            // toto: Joi.string().required()
         }).unknown();
         const { error } = schema.validate(vars);
         if (error) throw new Error(`.env file lack some env variables, ${error.message}`)
